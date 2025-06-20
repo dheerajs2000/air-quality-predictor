@@ -40,19 +40,18 @@ Built with **Flutter Web (Frontend)** and **Flask + Python (Backend)**. Deployed
 ## 📂 Folder Structure
 
 MajorProject/
-├── backend/ # Flask backend + ML model
-│ ├── app.py
-│ ├── air_quality_model.joblib
-│ └── Dockerfile
+├── backend/                  # Flask backend + ML model
+│   ├── app.py
+│   ├── air_quality_model.joblib
+│   └── Dockerfile
 │
-├── air_quality_web/ # Flutter web frontend
-│ ├── lib/
-│ ├── web/
-│ └── Dockerfile
+├── air_quality_web/          # Flutter web frontend
+│   ├── lib/
+│   ├── web/
+│   └── Dockerfile
 │
-├── docker-compose.yml # For local development
-└── README.md # ← You are here
-
+├── docker-compose.yml        # For local Docker development
+└── README.md                 # ← You are here
 
 
 ---
