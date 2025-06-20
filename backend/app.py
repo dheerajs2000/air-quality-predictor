@@ -17,10 +17,9 @@ except Exception as e:
     print("❌ Error loading model:", e)
     model = None
 
-# Replace this with your actual OpenWeather API Key
 API_KEY = "f71b6a9ccf235f000d3dd230691016a1"
 
-# Define the order of pollutants expected by the model
+# Order of pollutants expected by the model
 POLLUTANT_ORDER = ['co', 'no2', 'o3', 'so2', 'pm25', 'pm10']
 
 def get_pollutant_data(lat, lon):
