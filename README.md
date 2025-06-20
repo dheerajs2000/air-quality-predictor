@@ -63,7 +63,7 @@ MajorProject/
 cd backend
 python app.py
 
-2. Run Frontend (Flutter Web)
+### 2. Run Frontend (Flutter Web)
 
 cd air_quality_web
 flutter build web
