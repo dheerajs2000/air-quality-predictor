@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+.env
+.venv/
+venv/
+.envrc
+
+# macOS
+.DS_Store
+
+# Docker
+*.tar
+*.log
+
+# VSCode
+.vscode/
+
+# Flutter
+build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+pubspec.lock
+.idea/
+*.iml
+
+# Firebase
+.firebase/
+.firebaserc
+firebase-debug.log
+
+# Node modules (if using for web or Firebase)
+node_modules/
+
+# Git
+*.swp
+*.swo
+
