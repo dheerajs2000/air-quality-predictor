@@ -60,13 +60,11 @@ MajorProject/
 
 ### 1. Run Backend (Flask)
 
-```bash
 cd backend
 python app.py
 
 2. Run Frontend (Flutter Web)
 
-```bash
 cd air_quality_web
 flutter build web
 cd build/web
@@ -74,7 +72,6 @@ python3 -m http.server 8080
 
 OR Use Docker Compose
 
-```bash
 docker-compose up --build
 
 
