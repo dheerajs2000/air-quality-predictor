@@ -76,23 +76,23 @@ docker-compose up --build
 
 
 ## 🚢 Deployment on Google Cloud Run
-1.Dockerize both frontend and backend:
+### 1. Dockerize both frontend and backend:
 
 Flutter web: build and serve with nginx or http-server
 
 Flask backend: expose PORT=8080
 
-2.Push both Docker images to Artifact Registry:
+### 2. Push both Docker images to Artifact Registry:
 
 docker tag <image_name> asia-south1-docker.pkg.dev/<PROJECT-ID>/<REPO>/frontend
 docker push asia-south1-docker.pkg.dev/<PROJECT-ID>/<REPO>/frontend
 
-3.Deploy on Cloud Run from image and allow unauthenticated access.
+### 3. Deploy on Cloud Run from image and allow unauthenticated access.
 
-4.Replace backend URL in main.dart with the actual deployed Cloud Run backend URL.
+### 4. Replace backend URL in main.dart with the actual deployed Cloud Run backend URL.
 
 
-🧠 ML Model
+## 🧠 ML Model
 Model: RandomForestClassifier
 
 Trained on: Real-time pollutant concentration data
