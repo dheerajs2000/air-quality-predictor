@@ -3,6 +3,11 @@ import requests
 import joblib
 import numpy as np
 from flask_cors import CORS
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+
 
 app = Flask(__name__)
 CORS(app)
@@ -17,7 +22,7 @@ except Exception as e:
     print("❌ Error loading model:", e)
     model = None
 
-API_KEY = "f71b6a9ccf235f000d3dd230691016a1"
+API_KEY = os.getenv("OPENWEATHER_API_KEY")
 
 # Order of pollutants expected by the model
 POLLUTANT_ORDER = ['co', 'no2', 'o3', 'so2', 'pm25', 'pm10']
