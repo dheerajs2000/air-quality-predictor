@@ -1,0 +1,14 @@
+version: '3'
+services:
+  backend:
+    build:
+      context: /Users/dheerajs/MajorProject/backend
+    ports:
+      - "5000:5000"
+
+  frontend:
+    build:
+      context: /Users/dheerajs/MajorProject/air_quality_web
+    ports:
+      - "80:80"
+
