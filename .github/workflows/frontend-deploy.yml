@@ -49,4 +49,3 @@ jobs:
           --platform=managed \
           --region=asia-south1 \
           --allow-unauthenticated
-
