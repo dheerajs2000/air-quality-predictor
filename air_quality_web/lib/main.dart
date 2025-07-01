@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Air Quality Checker',
+      title: 'Air Quality Checker v2',
       theme: ThemeData(
         primarySwatch: Colors.teal,
         textTheme: GoogleFonts.montserratTextTheme()
