@@ -16,6 +16,19 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.13.9'
+
+    - name: Install dependencies
+      working-directory: air_quality_web
+      run: flutter pub get
+
+    - name: Build Flutter web
+      working-directory: air_quality_web
+      run: flutter build web
+
     - name: Authenticate with Google Cloud
       uses: google-github-actions/auth@v1
       with:
