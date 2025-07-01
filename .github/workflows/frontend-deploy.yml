@@ -2,10 +2,11 @@ name: Deploy Frontend to Cloud Run
 
 on:
   push:
-    paths:
-      - 'air_quality_web/**'
     branches:
       - main
+    paths:
+      - '.github/**'
+      - 'air_quality_web/**'
 
 jobs:
   deploy:
@@ -16,12 +17,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Setup Flutter
+    - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
         flutter-version: '3.13.9'
 
-    - name: Install dependencies
+    - name: Install Flutter dependencies
       working-directory: air_quality_web
       run: flutter pub get
 
