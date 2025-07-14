@@ -1,47 +1,37 @@
-name: Deploy Frontend to Cloud Run
+name: Deploy to Cloud Run
 
 on:
   push:
     branches:
-      - main
-    paths:
-      - '.github/**'
-      - 'air_quality_web/**'
+      - main  # Change if you're using a different branch
 
 jobs:
-  deploy:
-    name: Build and Deploy Frontend
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout source
       uses: actions/checkout@v3
 
-    - name: Set up Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: '3.32.5'
-
-    - name: Install Flutter dependencies
-      working-directory: air_quality_web
-      run: flutter pub get
-
-    - name: Build Flutter web
-      working-directory: air_quality_web
-      run: flutter build web
-
     - name: Authenticate with Google Cloud
-      uses: google-github-actions/auth@v1
+      uses: google-github-actions/auth@v2
       with:
-        credentials_json: ${{ secrets.GCP_SA_KEY }}
+        credentials_json: ${{ secrets.GCP_CREDENTIALS }}
 
-    - name: Set up Google Cloud SDK
-      uses: google-github-actions/setup-gcloud@v1
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+        project_id: trusty-solution-463105-a1
+        install_components: 'beta'
 
     - name: Build and push Docker image
       run: |
-        docker build -t asia-south1-docker.pkg.dev/trusty-solution-463105-a1/air-quality-repo/frontend ./air_quality_web
-        docker push asia-south1-docker.pkg.dev/trusty-solution-463105-a1/air-quality-repo/frontend
+        gcloud auth configure-docker asia-south1-docker.pkg.dev --quiet
+        docker buildx create --use
+        docker buildx build \
+          --platform linux/amd64 \
+          --tag asia-south1-docker.pkg.dev/trusty-solution-463105-a1/air-quality-repo/frontend \
+          --push .
 
     - name: Deploy to Cloud Run
       run: |
@@ -50,3 +40,4 @@ jobs:
           --platform=managed \
           --region=asia-south1 \
           --allow-unauthenticated
+
