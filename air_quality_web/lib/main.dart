@@ -176,34 +176,56 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   Future<void> getLocationDetailsFromGoogle(double lat, double lon) async {
-    const apiKey = 'AIzaSyC_58Ce3BYw70LHHVZsxGpKYkQT9pMOyNY';
-    final url = Uri.parse(
+  try {
+    // Step 1: Get API key from backend
+    final keyResponse = await http.get(
+      Uri.parse('https://air-quality-backend-515068882272.asia-south1.run.app/get-api-key'),
+    );
+
+    if (keyResponse.statusCode != 200) {
+      throw Exception("Failed to fetch API key");
+    }
+
+    final apiKey = jsonDecode(keyResponse.body)['key'];
+    if (apiKey == null || apiKey.isEmpty) {
+      throw Exception("API key is missing");
+    }
+
+    // Step 2: Call Google Geocoding API
+    final geocodeUrl = Uri.parse(
       'https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lon&key=$apiKey',
     );
 
-    try {
-      final response = await http.get(url);
-      if (response.statusCode == 200) {
-        final jsonData = json.decode(response.body);
-        if (jsonData['status'] == 'OK') {
-          final results = jsonData['results'] as List;
-          if (results.isNotEmpty) {
-            setState(() {
-              locationName = results[0]['formatted_address'];
-            });
-          } else {
-            setState(() {
-              locationName = AppLocalizations.of(context)!.unknownLocation;
-            });
-          }
+    final geoResponse = await http.get(geocodeUrl);
+
+    if (geoResponse.statusCode == 200) {
+      final jsonData = json.decode(geoResponse.body);
+      if (jsonData['status'] == 'OK') {
+        final results = jsonData['results'] as List;
+        if (results.isNotEmpty) {
+          setState(() {
+            locationName = results[0]['formatted_address'];
+          });
+        } else {
+          setState(() {
+            locationName = AppLocalizations.of(context)!.unknownLocation;
+          });
         }
+      } else {
+        setState(() {
+          locationName = AppLocalizations.of(context)!.unknownLocation;
+        });
       }
-    } catch (_) {
-      setState(() {
-        locationName = AppLocalizations.of(context)!.unknownLocation;
-      });
+    } else {
+      throw Exception("Google API request failed");
     }
+  } catch (e) {
+    // Fallback if anything fails
+    setState(() {
+      locationName = AppLocalizations.of(context)!.unknownLocation;
+    });
   }
+}
 
   Color getStatusColor() => result.toLowerCase() == 'safe' 
     ? const Color(0xFF10B981) 
