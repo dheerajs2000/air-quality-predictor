@@ -22,7 +22,9 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          gcloud builds submit --tag gcr.io/$rusty-solution-463105-a1/air-quality-frontend
+          gcloud auth configure-docker asia-south1-docker.pkg.dev --quiet
+          gcloud builds submit air_quality_web \
+              --tag asia-south1-docker.pkg.dev/trusty-solution-463105-a1/air-quality-repo/frontend
 
       - name: Deploy to Cloud Run
         run: |
