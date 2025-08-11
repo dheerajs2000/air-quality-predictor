@@ -1,0 +1,17 @@
+{
+  "@@locale": "en",
+  "headerTitle": "Air Quality Checker",
+  "subtitle": "Breathe Safer. Live Better.",
+  "checkAirQuality": "Check Air Quality",
+  "statusLabel": "Status: {status}",
+  "switchToEnglish": "Switch to English",
+  "switchToKannada": "Switch to Kannada",
+  "coInfo": "Carbon Monoxide: A colorless, odorless gas that can be harmful when inhaled in large amounts.",
+  "so2Info": "Sulfur Dioxide: A toxic gas with a pungent smell; causes respiratory issues.",
+  "no2Info": "Nitrogen Dioxide: A reddish-brown gas that can irritate lungs and worsen asthma.",
+  "o3Info": "Ozone: A reactive gas that can damage lung tissue and exacerbate respiratory diseases.",
+  "pm10Info": "Particulate Matter ≤10µm: Inhalable particles that affect lungs and heart.",
+  "pm25Info": "Particulate Matter ≤2.5µm: Fine particles that penetrate deep into lungs, dangerous for health.",
+  "locationUnavailable": "Location unavailable",
+  "unknownLocation": "Unknown location"
+}
