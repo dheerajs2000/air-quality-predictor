@@ -48,6 +48,11 @@ def get_pollutant_data(lat, lon):
 def home():
     return "🌍 Air Quality Prediction API is running."
 
+
+@app.route("/get-api-key")
+def get_api_key():
+    return jsonify({"key": os.environ.get("GOOGLE_MAPS_API_KEY")})
+
 @app.route("/predict", methods=["POST"])
 def predict():
     """
