@@ -8,36 +8,28 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout source
-      uses: actions/checkout@v3
+      - name: Checkout source
+        uses: actions/checkout@v3
 
-    - name: Authenticate with Google Cloud
-      uses: google-github-actions/auth@v2
-      with:
-        credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+      - name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
 
-    - name: Set up Cloud SDK
-      uses: google-github-actions/setup-gcloud@v2
-      with:
-        project_id: trusty-solution-463105-a1
-        install_components: 'beta'
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
 
-    - name: Build and push Docker image
-      run: |
-        gcloud auth configure-docker asia-south1-docker.pkg.dev --quiet
-        docker buildx create --use
-        docker buildx build \
-          --platform linux/amd64 \
-          --tag asia-south1-docker.pkg.dev/trusty-solution-463105-a1/air-quality-repo/frontend \
-          --push .
+      - name: Build and push Docker image
+        run: |
+          gcloud builds submit --tag gcr.io/$rusty-solution-463105-a1/air-quality-frontend
 
-    - name: Deploy to Cloud Run
-      run: |
-        gcloud run deploy air-quality-frontend \
-          --image=asia-south1-docker.pkg.dev/trusty-solution-463105-a1/air-quality-repo/frontend \
-          --platform=managed \
-          --region=asia-south1 \
-          --allow-unauthenticated
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy air-quality-frontend \
+            --image gcr.io/$rusty-solution-463105-a1/air-quality-frontend \
+            --platform managed \
+            --region asia-south1 \
+            --allow-unauthenticated
+
 
